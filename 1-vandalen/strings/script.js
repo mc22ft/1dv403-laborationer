@@ -4,16 +4,37 @@ window.onload = function(){
 
 	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var convertString = function(str){
-		// Plats för förändring.		
+		// Plats för förändring.
+        
+        var myLettersArr = new Array();
+        
+        myLettersArr = str.split('');
+        
+        for (var i = 0; i < myLettersArr.length; i++){
+            if (myLettersArr[i] == myLettersArr[i].toUpperCase()){
+               // alert('is upper case');
+                myLettersArr[i] = myLettersArr[i].toLowerCase();
+            //    alert('sMall');
+            } 
+            else {
+                 myLettersArr[i] = myLettersArr[i].toUpperCase();
+                alert("small");
+            }
+        }
+        
+        
+        
+        //Array med bokstäver...
+        // if sats: if stor bokstav gör till små och vise varse
+      
+        
+        
+        
 		// Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-	
-
-
-
-
-
-
+        
+        
+        return myLettersArr;
 	};
 	// ------------------------------------------------------------------------------
 
