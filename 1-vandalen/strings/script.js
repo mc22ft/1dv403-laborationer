@@ -6,39 +6,39 @@ window.onload = function(){
 	var convertString = function(str){
 		// Plats för förändring.
         
-        var myLettersArr = new Array();
-        
-        myLettersArr = str.split('');        
-        for (var i = 0; i < myLettersArr.length; i++){
-            if (myLettersArr[i] == myLettersArr[i].toUpperCase()){
-               // alert('is upper case');
-                myLettersArr[i] = myLettersArr[i].toLowerCase();
-            //    alert('sMall');
-            } 
-            else {
-                 myLettersArr[i] = myLettersArr[i].toUpperCase();
-                //alert("small");
+        // Vid fel, kasta ett undantag med ett meddelande till användaren.        
+        try
+        {
+            if (str.length === 0){
+            throw "Försök igen! Du måste skriva in något!!!";
             }
         }
+        catch (err)
+        {
+            return  err; 
+        }  
+            
+        //Funktionen
         
+        var myLettersArr = [];       
+        myLettersArr = str.split('');   
+        var i;
+        for (i = 0; i < myLettersArr.length; i++){
+            if (myLettersArr[i] == myLettersArr[i].toUpperCase()){               
+                myLettersArr[i] = myLettersArr[i].toLowerCase();            
+            } 
+            else {
+                 myLettersArr[i] = myLettersArr[i].toUpperCase();                
+            }
+        }     
         
         str = myLettersArr.toString();
-        str = str.replace(/,/g, '');
-            
-         //   .toString();
-        
-        
-        //Array med bokstäver...
-        // if sats: if stor bokstav gör till små och vise varse
-      
-        
-        
+        str = str.replace(/,/g, '');            
         
 		// Returnera den konverterade strängen.
-		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-        
         
         return str;
+        
 	};
 	// ------------------------------------------------------------------------------
 
