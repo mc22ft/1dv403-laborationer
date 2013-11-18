@@ -8,8 +8,7 @@ window.onload = function(){
         
         var myLettersArr = new Array();
         
-        myLettersArr = str.split('');
-        
+        myLettersArr = str.split('');        
         for (var i = 0; i < myLettersArr.length; i++){
             if (myLettersArr[i] == myLettersArr[i].toUpperCase()){
                // alert('is upper case');
@@ -18,10 +17,15 @@ window.onload = function(){
             } 
             else {
                  myLettersArr[i] = myLettersArr[i].toUpperCase();
-                alert("small");
+                //alert("small");
             }
         }
         
+        
+        str = myLettersArr.toString();
+        str = str.replace(/,/g, '');
+            
+         //   .toString();
         
         
         //Array med bokstäver...
@@ -34,7 +38,7 @@ window.onload = function(){
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
         
         
-        return myLettersArr;
+        return str;
 	};
 	// ------------------------------------------------------------------------------
 
