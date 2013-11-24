@@ -1,16 +1,30 @@
 "use strict";
 
-window.onload = function(){
-
+window.onload = function(){   
+        
 	
-	var birthday = function(date){
-		
-
-
-			// Din kod här.
-
-
-
+	var birthday = function(date){		
+               
+        var now = new Date();
+        var myDateIn = new Date(date);          
+         
+        testDate(date);
+        
+        function testDate(){                    
+                if(isNaN(date)){
+                    throw new Error("Inget gilltigt datum!!!");
+                }
+        }      
+        
+        function getDays(){
+            var days;            
+            days = (myDateIn.getTime() - now.getTime())/86400000;
+            days = Math.ceil(days);          
+            return days;
+        }        
+    
+        return getDays();      
+        
 
 	};
 	// ------------------------------------------------------------------------------
