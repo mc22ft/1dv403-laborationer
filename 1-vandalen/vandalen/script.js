@@ -12,10 +12,10 @@ var makePerson = function (persArr) {
         return item.age;
     });
     myYearArr.sort();
-        
-
     result.minAge = myYearArr[0];
-    result.maxAge = myYearArr.length - 1;
+
+    result.maxAge = myYearArr[myYearArr.length-1];
+
     result.evarageAge = myYearArr.reduce(function (prev, cur, index, array) {
         return Math.round(((prev + cur) / persArr.length));
     });
