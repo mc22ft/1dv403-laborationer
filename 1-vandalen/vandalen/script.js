@@ -2,11 +2,7 @@
 
 var makePerson = function (persArr) {
 
-    // Lös uppgiften
-    var minAge;
-    var maxAge;
-    var avarageAge;
-    var names;
+    // Lös uppgiften    
 
     //Resultat objekt
     var result = {};
@@ -30,8 +26,8 @@ var makePerson = function (persArr) {
             sum += persArr[i].age;
             nameArr[i] = persArr[i].name;
             }
-        result.avarageAge = Math.round(sum / persArr.length);
-
+        result.averageAge = Math.round(sum / persArr.length);        
+       
         //Får ut namnen med ", "mellan                 
         
         result.names = nameArr.join(", ");

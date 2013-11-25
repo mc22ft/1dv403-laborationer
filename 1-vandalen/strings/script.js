@@ -7,16 +7,12 @@ window.onload = function(){
 		// Plats för förändring.
         
         // Vid fel, kasta ett undantag med ett meddelande till användaren.        
-        try
-        {
+        
             if (str.length === 0){
-            throw "Försök igen! Du måste skriva in något!!!";
+            throw Error("Försök igen! Du måste skriva in något!!!");
             }
-        }
-        catch (err)
-        {
-            return  err; 
-        }  
+      
+        
             
         //Funktionen
         
@@ -32,9 +28,16 @@ window.onload = function(){
             }
         }     
         
-        str = myLettersArr.toString();
+
+
+        str = myLettersArr.toString(); 
+        str = str.replace(/a/g, "#"); 
+        str = str.replace(/A/g, "#");
+
         str = str.replace(/,/g, '');            
         
+
+
 		// Returnera den konverterade strängen.
         
         return str;
