@@ -6,12 +6,26 @@ var makePerson = function (persArr) {
 
     //Får ut minsta åldern
 
-    //ålder till array
-       
+    //ålder till array       
     var myYearArr = [];
     myYearArr = persArr.map(function (item, i) {
         return item.age;
     });
+    myYearArr.sort();
+        
+
+    result.minAge = myYearArr[0];
+    result.maxAge = myYearArr.length - 1;
+    result.evarageAge = myYearArr.reduce(function (prev, cur, index, array) {
+        return Math.round(((prev + cur) / persArr.length));
+    });
+
+
+
+    result.names;
+
+
+
 
     result.averageAge = persArr.map(function (value) {
         return Math.round(item / persArr.length);
