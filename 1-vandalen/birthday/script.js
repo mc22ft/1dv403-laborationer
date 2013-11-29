@@ -4,18 +4,33 @@ window.onload = function(){
         
 	
 	var birthday = function(date){		
-               
+            
+
+
         var now = new Date();
         var myDateIn = new Date(date);          
          
         testDate(date);
-        
-        function testDate(){                    
-                if(isNaN(date)){
-                    throw new Error("Inget gilltigt datum!!!");
-                }
+
+        myDateIn.setFullYear(now.getFullYear());        
+      
+
+		if(myDateIn.getTime() - now.getTime() < 0){
+	    	myDateIn.setFullYear(now.getFullYear()+1);
+	    	//gör så att det inte blir minus	    		
+		}
+
+
+
+        function testDate(date){                    
+                if(!Date.parse(date)){
+                	throw new Error("Inget gilltigt datum!");                    
+                }                                
         }      
         
+        //om man fyller år igår,
+
+
         function getDays(){
             var days;            
             days = (myDateIn.getTime() - now.getTime())/86400000;
