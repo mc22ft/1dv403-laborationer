@@ -18,7 +18,7 @@ function Message(message, date){
     this.setDate = function(_date){
         date = _date;                               //Göra tester!?!
         }
-
+        
     //Extra kontroll och kör dom genom konstruktorn
     this.setText(message);
     this.setDate(date);    
