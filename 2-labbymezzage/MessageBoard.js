@@ -19,7 +19,7 @@ var MessageBoard = {                      //var message = new Message();
 
             //console.log();
             console.log(messages);        
-            alert(mess2.getText());
+            //alert(mess2.getText());
             console.log(messages[2].getText());        /*
             alert(mess);            
 		    alert(mess.getText());
