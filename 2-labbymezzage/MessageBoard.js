@@ -21,14 +21,13 @@ var MessageBoard = {                      //var message = new Message();
             var inputText = texten.value;
             alert(inputText);
 
-
-
-
-            //new Message(value, new Date()); //Formatera datumet!!
+            var myMess = new Message(inputText, new Date()); //Formatera datumet!!
+            messages.push(myMess);
+            //onsole.log(messages[0].getText());
         }
 
 
-
+/*
 		var mess0 = new Message("Testar om detta funkar på riktigt", new Date());
         var mess1 = new Message("Testar om detta funkar på riktigt", new Date());
         var mess2 = new Message("Testar om detta funkar på riktigt", new Date());
@@ -38,7 +37,7 @@ var MessageBoard = {                      //var message = new Message();
             var count = messages.push(mess1);
             var count = messages.push(mess2);
             var count = messages.push(mess3);
-
+*/
             //console.log();
             //console.log(messages);        
             //alert(mess2.getText());
