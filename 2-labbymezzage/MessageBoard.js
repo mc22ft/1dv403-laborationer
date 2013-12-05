@@ -1,11 +1,17 @@
 "use strict";
 //Skapar instans till message
+var messages = new Array();
+
 var MessageBoard = {
 
   messages: [],
 
 
   init: function (e) {//e = lysnar på vad anv trycker på
+    //var mess0 = new Message("Testar om detta funkar på riktigt", new Date());
+    //var mess1 = new Message("Testar om detta funkar på riktigt", new Date());
+    //messages.push(mess0, mess1);
+
                             //Kan lägga till händelsehanterare E07 tid: 0:53:00
     var divBoxNode = document.querySelector("#myBox");
     var textareaNode = divBoxNode.childNodes[1];
@@ -13,7 +19,8 @@ var MessageBoard = {
       //Knapp tryck
     var buttomNode = textareaNode.childNodes[3];
     buttomNode.onclick = MessageBoard.buttomPressed;
-    //MessageBoard.renderMessages();
+    console.log("ska in i render");
+   
 
   },
 
@@ -23,39 +30,42 @@ var MessageBoard = {
     var inputText = texten.value;
     
     var myMessObj = new Message(inputText, new Date()); //Formatera datumet!!
-    MessageBoard.messages.push(myMessObj);
+    messages.push(myMessObj);
     //alert(MessageBoard.message[1].getText());
     //document.getElementById("messageArea").value = "";
+    //alert(messages[0].getText());
+    MessageBoard.renderMessages();
   },
 
     //Loopar igenom arrayen- skriver ut samtliga medd med renderMessage
   renderMessages: function () {
     
     var i;
-    for (i = 0; i < MessageBoard.messages.length; i++) {
+    for (i = 0; i < messages.length; i++) {
       MessageBoard.renderMessage(i);
            var text = document.createElement("p");
-      p.innerHTML = MessageBoard.messages[i].getText();
+      //p.innerHTML = messages[i].getText();
            //div.appendChild(text);
     }
   },
 
      //Ritat upp meddelande strukturen
   renderMessage: function (i) {
-    var  div = document.querySelector("#newMessage");
-
+    var  ul = document.querySelector("#newMessage ul");
+    
     var li = document.createElement("li");
     var p = document.createElement("p");
-    var txt = document.createTextNode(MessageBoard.messages[i].getText());
-
+    //var txt = document.createTextNode(messages[i].getText());
+    p.innerHTML = messages[i].getText();
+    
     li.appendChild(p);
-    p.appendChild(txt);
+    //p.appendChild(txt);
 
     ul.appendChild(li);
-
+    alert("Får inte texten att spara!");
   }
 
-};
+}
 
 window.onload = MessageBoard.init;
 
