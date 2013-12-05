@@ -1,87 +1,72 @@
-﻿"use strict";
-
+"use strict";
 //Skapar instans till message
-var MessageBoard = {                      //var message = new Message();    
+var MessageBoard = {
+
+  messages: [],
+
+
+  init: function (e) {//e = lysnar på vad anv trycker på
+                            //Kan lägga till händelsehanterare E07 tid: 0:53:00
+    var divBoxNode = document.querySelector("#myBox");
+    var textareaNode = divBoxNode.childNodes[1];
+
+      //Knapp tryck
+    var buttomNode = textareaNode.childNodes[3];
+    buttomNode.onclick = MessageBoard.buttomPressed;
+    //MessageBoard.renderMessages();
+
+  },
+
+      //Funktion "tryck på knappen"
+  buttomPressed: function () {   
+    var texten = document.getElementById("myText");
+    var inputText = texten.value;
     
+    var myMessObj = new Message(inputText, new Date()); //Formatera datumet!!
+    MessageBoard.messages.push(myMessObj);
+    //alert(MessageBoard.message[1].getText());
+    //document.getElementById("messageArea").value = "";
+  },
+
+    //Loopar igenom arrayen- skriver ut samtliga medd med renderMessage
+  renderMessages: function () {
     
+    var i;
+    for (i = 0; i < MessageBoard.messages.length; i++) {
+      MessageBoard.renderMessage(i);
+           var text = document.createElement("p");
+      p.innerHTML = MessageBoard.messages[i].getText();
+           //div.appendChild(text);
+    }
+  },
 
-    init:function(){
-        
-        var messages = [];
+     //Ritat upp meddelande strukturen
+  renderMessage: function (i) {
+    var  div = document.querySelector("#newMessage");
 
+    var li = document.createElement("li");
+    var p = document.createElement("p");
+    var txt = document.createTextNode(MessageBoard.messages[i].getText());
 
-        var divBoxNode = document.querySelector("#myBox");
-        var textareaNode = divBoxNode.childNodes[1];       
+    li.appendChild(p);
+    p.appendChild(txt);
 
-        //Knapp tryck
-        var buttomNode = textareaNode.childNodes[3];
-        buttomNode.onclick = buttomPressed;
+    ul.appendChild(li);
 
-        
+  }
 
-        //Funktion "tryck på knappen"
-        function buttomPressed (){
-
-            var texten = document.getElementById("myText");
-            var inputText = texten.value;
-            alert(inputText);
-
-            var myMess = new Message(inputText, new Date()); //Formatera datumet!!
-            var count = messages.push(myMess);
-            //onsole.log(messages[0].getText());
-            renderMessage(myMess);
-            
-            //alert("Nu ska det vara inlagt");
-        }
-
-        //Ritat upp meddelande strukturen
-        function renderMessage(myMess){
-            var div = document.querySelector("#newMessage");
-           
-            var ul = document.createElement("ul");
-            var li = document.createElement("li");
-            var p = document.createElement("p");
-            var txt = document.createTextNode(myMess.getText());
-            
-            ul.appendChild(li);
-            li.appendChild(p);
-            p.appendChild(txt);
-            div.appendChild(ul);          
-
-        }
-
-        //Loopar igenom arrayen- skriver ut samtliga medd med renderMessage
-         function renderMessages(){          
-           var i;
-           for (i = 0; i < messages.length; i++) {
-               messages[i]
-           };
-
-           
-        }
-/*
-		var mess0 = new Message("Testar om detta funkar på riktigt", new Date());
-        var mess1 = new Message("Testar om detta funkar på riktigt", new Date());
-        var mess2 = new Message("Testar om detta funkar på riktigt", new Date());
-        var mess3 = new Message("Testar om detta funkar på riktigt", new Date());
-		
-            var count = messages.push(mess0);            
-            var count = messages.push(mess1);
-            var count = messages.push(mess2);
-            var count = messages.push(mess3);
-*/
-            //console.log();
-            //console.log(messages);        
-            //alert(mess2.getText());
-            //console.log(messages[2].getText()); 
-                   /*
-            alert(mess);            
-		    alert(mess.getText());
-            alert(mess.getDate());
-            mess.setText("Det gick och ändra texten.");
-            alert(mess);
-		*/    
-            }
-    };
+};
 
 window.onload = MessageBoard.init;
+
+    //var Message = {};
+    //var messages = [];
+    //MessageBoard.messages = [];
+
+    //var mess0 = new Message("Testar om detta funkar på riktigt", new Date());
+    //var mess1 = new Message("Testar om detta funkar på riktigt", new Date());
+    //MessageBoard.messages.push(mess0, mess1);
+    //alert(messages[0].getText());
+    //messages[1].getText();
+    //MessageBoard.messages[0].getText();
+    //alert(MessageBoard.messages[1].getText());
