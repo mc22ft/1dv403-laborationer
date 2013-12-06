@@ -1,6 +1,6 @@
 "use strict";
 //Skapar instans till message
-var messages = new Array();
+var messages = [];
 
 var MessageBoard = {
 
@@ -20,15 +20,13 @@ var MessageBoard = {
     var buttomNode = textareaNode.childNodes[3];
     buttomNode.onclick = MessageBoard.buttomPressed;
     console.log("ska in i render");
-   
-
   },
 
-      //Funktion "tryck på knappen"
-  buttomPressed: function () {   
+  //Funktion "tryck på knappen"
+  buttomPressed: function () {
     var texten = document.getElementById("myText");
     var inputText = texten.value;
-    
+
     var myMessObj = new Message(inputText, new Date()); //Formatera datumet!!
     messages.push(myMessObj);
     //alert(MessageBoard.message[1].getText());
@@ -39,11 +37,10 @@ var MessageBoard = {
 
     //Loopar igenom arrayen- skriver ut samtliga medd med renderMessage
   renderMessages: function () {
-    
     var i;
     for (i = 0; i < messages.length; i++) {
       MessageBoard.renderMessage(i);
-           var text = document.createElement("p");
+      var text = document.createElement("p");
       //p.innerHTML = messages[i].getText();
            //div.appendChild(text);
     }
@@ -52,12 +49,11 @@ var MessageBoard = {
      //Ritat upp meddelande strukturen
   renderMessage: function (i) {
     var  ul = document.querySelector("#newMessage ul");
-    
     var li = document.createElement("li");
     var p = document.createElement("p");
     //var txt = document.createTextNode(messages[i].getText());
     p.innerHTML = messages[i].getText();
-    
+
     li.appendChild(p);
     //p.appendChild(txt);
 
@@ -65,7 +61,7 @@ var MessageBoard = {
     alert("Får inte texten att spara!");
   }
 
-}
+};
 
 window.onload = MessageBoard.init;
 
