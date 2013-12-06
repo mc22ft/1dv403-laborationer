@@ -10,6 +10,7 @@ var MessageBoard = {
   init: function (e) {//e = lysnar på vad anv trycker på
                       //Kan lägga till händelsehanterare E07 tid: 0:53:00
     
+    MessageBoard.makeElement();
 
     var divBoxNode = document.querySelector("#myBox form button");
     //divBoxNode.addEventListener("click", buttomPressed, false);
@@ -19,35 +20,45 @@ var MessageBoard = {
     divBoxNode.onclick = function () {
       console.log("onclick");
       MessageBoard.buttomPressed(); //anonym function return false      
+      
       return false;
     };
 
-    MessageBoard.counter();
-
-    
   },
 
-  counter: function () {
+    makeElement: function () {
+
     var div = document.querySelector("#myBox");
-    var p = document.createElement(p);
-
-    p = document.createTextNode("Antal meddelande:");
-
+    var p = document.createElement("p");
+    p.className = "pCounter";
+    p.innerHTML = "Antal meddelande:";
     div.appendChild(p);
+    },
+    //MessageBoard.counter();
+
+
+  counter: function () {
+    alert("inne i counter");
+
+    document.querySelector("#myBox p").innerHTML = "Antal meddelande:" + MessageBoard.messages.length;
+    //var p document.getElementsByClassName("pCounter");
+    //p.innerHTML = "Antal meddelande:" + MessageBoard.messages.length;
+    //div text = document.getElementsByClassName('pCounter');
+    //text.innerHTML = MessageBoard.messages.length;
+    
   },
 
   //Funktion "tryck på knappen"
   buttomPressed: function () {
-    console.log("knappt truckt");
+    console.log("knappt tryckt");
     var texten = document.getElementById("myText");
     var inputText = texten.value;
 
     var myMessObj = new Message(inputText, new Date()); //Formatera datumet!!
-   MessageBoard.messages.push(myMessObj);
-    //alert(MessageBoard.message[1].getText());
-    //document.getElementById("messageArea").value = "";
-    //alert(messages[0].getText());
+    MessageBoard.messages.push(myMessObj);
+
     MessageBoard.renderMessages();
+    
   },
 
     //Loopar igenom arrayen- skriver ut samtliga medd med renderMessage
@@ -79,7 +90,7 @@ var MessageBoard = {
     //p.appendChild(txt);
 
     ul.appendChild(li);
-    
+    MessageBoard.counter();
   }
 
 };
