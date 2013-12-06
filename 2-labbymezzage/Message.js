@@ -16,7 +16,8 @@ function Message(message, date){
         return date;
         }
     this.setDate = function(_date){
-        date = _date;                               //Göra tester!?!
+        date = _date;
+        //date = date.toLocaleString();                             //Göra tester!?!
         }
         
     //Extra kontroll och kör dom genom konstruktorn
@@ -32,11 +33,11 @@ function Message(message, date){
     //HTML text/date
 
     Message.prototype.getHTMLText = function() {
-    return this.getText.replace(/[\n\r]/g, "<br/>");
+    return this.getText().replace(/[\n\r]/g, "<br/>");
     };   
 
     Message.prototype.getDateText = function(){
-        return this.getDate();
+        return this.getDate().toLocaleString();
     };
 
     /*

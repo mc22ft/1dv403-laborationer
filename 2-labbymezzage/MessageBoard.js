@@ -8,11 +8,7 @@ var MessageBoard = {
 
 
   init: function (e) {//e = lysnar på vad anv trycker på
-    //var mess0 = new Message("Testar om detta funkar på riktigt", new Date());
-    //var mess1 = new Message("Testar om detta funkar på riktigt", new Date());
-    //messages.push(mess0, mess1);
-
-                            //Kan lägga till händelsehanterare E07 tid: 0:53:00
+                      //Kan lägga till händelsehanterare E07 tid: 0:53:00
     
 
     var divBoxNode = document.querySelector("#myBox form button");
@@ -25,7 +21,19 @@ var MessageBoard = {
       MessageBoard.buttomPressed(); //anonym function return false      
       return false;
     };
-    console.log("ska in i render");
+
+    MessageBoard.counter();
+
+    
+  },
+
+  counter: function () {
+    var div = document.querySelector("#myBox");
+    var p = document.createElement(p);
+
+    p = document.createTextNode("Antal meddelande:");
+
+    div.appendChild(p);
   },
 
   //Funktion "tryck på knappen"
@@ -45,6 +53,9 @@ var MessageBoard = {
     //Loopar igenom arrayen- skriver ut samtliga medd med renderMessage
   renderMessages: function () {
     var i;
+    
+    document.querySelector("#newMessage ul").innerHTML = "";
+
     for (i = 0; i < MessageBoard.messages.length; i++) {
       MessageBoard.renderMessage(i);
       var text = document.createElement("p");
@@ -58,14 +69,17 @@ var MessageBoard = {
     var  ul = document.querySelector("#newMessage ul");
     var li = document.createElement("li");
     var p = document.createElement("p");
+    var time = document.createElement("time");
     //var txt = document.createTextNode(messages[i].getText());
-    p.innerHTML = MessageBoard.messages[i].getText();
-
+    p.innerHTML = MessageBoard.messages[i].getHTMLText();
+    time.innerHTML = MessageBoard.messages[i].getDateText();    
+    
+    p.appendChild(time);
     li.appendChild(p);
     //p.appendChild(txt);
 
     ul.appendChild(li);
-    alert("Får inte texten att spara!");
+    
   }
 
 };
