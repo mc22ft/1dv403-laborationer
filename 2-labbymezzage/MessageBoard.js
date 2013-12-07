@@ -6,11 +6,12 @@ var MessageBoard = {
 
   messages: [],
 
-
   init: function (e) {//e = lysnar på vad anv trycker på
                       //Kan lägga till händelsehanterare E07 tid: 0:53:00
     
     MessageBoard.makeElement();
+
+    
 
     var divBoxNode = document.querySelector("#myBox form button");
     //divBoxNode.addEventListener("click", buttomPressed, false);
@@ -19,12 +20,22 @@ var MessageBoard = {
     //var buttomNode = textareaNode.childNodes[3];    
     divBoxNode.onclick = function () {
       console.log("onclick");
-      MessageBoard.buttomPressed(); //anonym function return false      
+      MessageBoard.buttomPressed(); //anonym function return false
       
       return false;
     };
 
+    //Raderar!
+    //imgClose.onclick = function () {
+     // MessageBoard.removeMessage()
+      //return false;
+   // };
+
   },
+
+    removeMessage: function (id) {
+
+    },
 
     makeElement: function () {
 
@@ -89,8 +100,24 @@ var MessageBoard = {
     li.appendChild(p);
     //p.appendChild(txt);
 
+    //länkar in bild i p tag för radering
+    var imgClose = document.createElement("img");
+    li.appendChild(imgClose);
+    imgClose.src="pic/delete.png";
+    imgClose.alt="Delete";
+    //Lägger till class för id erase
+    var idToClass = MessageBoard.messages.length;
+    imgClose.className="imgClass"+idToClass; 
+
+    //kopplar ihop allt 
     ul.appendChild(li);
+    
+    
+    
+    
+    //Uppdaterar meddelande räknaren
     MessageBoard.counter();
+
   }
 
 };
