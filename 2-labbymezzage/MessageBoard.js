@@ -9,6 +9,8 @@ var MessageBoard = {
   init: function (e) {//e = lysnar på vad anv trycker på
                       //Kan lägga till händelsehanterare E07 tid: 0:53:00
     
+
+
     MessageBoard.makeElement();
 
     
@@ -25,16 +27,28 @@ var MessageBoard = {
       return false;
     };
 
-    //Raderar!
-    //imgClose.onclick = function () {
-     // MessageBoard.removeMessage()
-      //return false;
-   // };
+
+    //var imgNode = document.querySelector("#newMessage ul li img");
+    //Raderar! var x=document.getElementsByTagName('body')[0];om jag tror rätt så är detta classnamnet och sen child där på
+     
+
+    
 
   },
 
-    removeMessage: function (id) {
-
+    removeMessage: function (e) {
+      var e = e;
+      e.preventDefault();
+      //document.querySelector(img).innerHTML = "";
+      e.target.parentNode.innerHTML = ""; //upp ett till
+      
+      //var u = e.target;
+      //e.target.innerHTML = "Testar";
+      //this.messages.splice(e. 1);
+      //console.log(e.target);
+      console.log(e.target.parentNode); 
+      
+      console.log(e.target)
     },
 
     makeElement: function () {
@@ -49,7 +63,7 @@ var MessageBoard = {
 
 
   counter: function () {
-    alert("inne i counter");
+   
 
     document.querySelector("#myBox p").innerHTML = "Antal meddelande:" + MessageBoard.messages.length;
     //var p document.getElementsByClassName("pCounter");
@@ -106,11 +120,22 @@ var MessageBoard = {
     imgClose.src="pic/delete.png";
     imgClose.alt="Delete";
     //Lägger till class för id erase
-    var idToClass = MessageBoard.messages.length;
-    imgClose.className="imgClass"+idToClass; 
+    var idToLiClass = i;
+    li.className="liClass"+idToLiClass; 
+    
 
     //kopplar ihop allt 
     ul.appendChild(li);
+
+    //var imgNode = document.querySelector("#newMessage ul li img");
+
+    imgClose.onclick = function (e) {
+      //alert("inne i close function");
+      MessageBoard.removeMessage(e);
+      return false;
+    };
+
+    
     
     
     
