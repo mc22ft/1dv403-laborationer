@@ -37,18 +37,32 @@ var MessageBoard = {
   },
 
     removeMessage: function (e) {
-      var e = e;
+      var e = e;     
       e.preventDefault();
-      //document.querySelector(img).innerHTML = "";
-      e.target.parentNode.innerHTML = ""; //upp ett till
       
-      //var u = e.target;
-      //e.target.innerHTML = "Testar";
-      //this.messages.splice(e. 1);
-      //console.log(e.target);
-      console.log(e.target.parentNode); 
+      //Tar bort elementen
+      var className = e.target.parentNode.childNodes[0].className;     
+      var arrID = className; 
+      var element = document.getElementsByClassName(className);      
+      console.log(element[0].parentNode);
+      element[0].parentNode.innerHTML="";
       
-      console.log(e.target)
+      //Tar bort från array
+      var arrId = arrID.charAt(arrID.length -1)
+      var arridd = parseInt(arrId)
+      //console.log(this.messages.slice(arridd, 1));
+      //console.log(e.messages);
+
+      this.messages.splice(arridd, 1);
+      //var id = event.target.id;
+      //this.messages.slice(e);
+      //alert(e.target.id);
+     // console.log(this.message.slice(arrId));
+      //console.log(e.messages);
+      
+
+
+      
     },
 
     makeElement: function () {
@@ -120,8 +134,8 @@ var MessageBoard = {
     imgClose.src="pic/delete.png";
     imgClose.alt="Delete";
     //Lägger till class för id erase
-    var idToLiClass = i;
-    li.className="liClass"+idToLiClass; 
+    var idToPClass = i;
+    p.className="pClass"+idToPClass; 
     
 
     //kopplar ihop allt 
