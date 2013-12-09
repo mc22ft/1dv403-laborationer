@@ -34,6 +34,10 @@ var MessageBoard = {
 
   },
 
+    pressKeys: function () {
+      alert("tangent tryckt!!!");
+    },
+
     time: function (e) {
       var e = e;     
       e.preventDefault();      
@@ -68,37 +72,38 @@ var MessageBoard = {
     
       alert("Inlägget skapades den " +date+ " " +n+ " " +year+ " klockan " +nowTime);
 
-
-
-
     },
 
     removeMessage: function (e) {
-      var e = e;     
-      e.preventDefault();
-      
-      //Tar bort elementen
-      var className = e.target.parentNode.childNodes[0].className;     
-      var arrID = className; 
-      var element = document.getElementsByClassName(className);      
-      console.log(element[0].parentNode);
-      element[0].parentNode.innerHTML="";
-      
-      //Tar bort från array
-      var arrId = arrID.charAt(arrID.length -1)
-      var arridd = parseInt(arrId)
-      //console.log(this.messages.slice(arridd, 1));
-      //console.log(e.messages);
+      var nowConfirm = confirm("Vill du verkligen radera meddelandet?");
+      if(nowConfirm === true)
+      {
+        var e = e;     
+        e.preventDefault();
+        
+        //Tar bort elementen
+        var className = e.target.parentNode.childNodes[0].className;     
+        var arrID = className; 
+        var element = document.getElementsByClassName(className);      
+        console.log(element[0].parentNode);
+        element[0].parentNode.innerHTML="";
+        
+        //Tar bort från array
+        var arrId = arrID.charAt(arrID.length -1)
+        var arridd = parseInt(arrId)
+        //console.log(this.messages.slice(arridd, 1));
+        //console.log(e.messages);
 
-      this.messages.splice(arridd, 1);
-      //var id = event.target.id;
-      //this.messages.slice(e);
-      //alert(e.target.id);
-     // console.log(this.message.slice(arrId));
-      //console.log(e.messages);
-      
-      MessageBoard.counter();
-      
+        this.messages.splice(arridd, 1);
+        //var id = event.target.id;
+        //this.messages.slice(e);
+        //alert(e.target.id);
+       // console.log(this.message.slice(arrId));
+        //console.log(e.messages);
+        
+        MessageBoard.counter();
+      }
+
     },
 
     makeElement: function () {
@@ -127,6 +132,23 @@ var MessageBoard = {
   buttomPressed: function () {
     console.log("knappt tryckt");
     var texten = document.getElementById("myText");
+    
+
+
+    var showKeyPress;
+    texten.onkeypress = showKeyPress;
+    function showKeyPress(e){
+      if(!e)
+      {
+        var e = window.event;
+      console.log(showKeyPress(e);}
+      return false;
+    };
+    
+
+
+
+
     var inputText = texten.value;
 
     var myMessObj = new Message(inputText, new Date()); //Formatera datumet!!
