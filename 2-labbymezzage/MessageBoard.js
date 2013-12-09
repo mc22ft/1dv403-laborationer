@@ -11,9 +11,7 @@ var MessageBoard = {
     
 
 
-    MessageBoard.makeElement();
-
-    
+    MessageBoard.makeElement();    
 
     var divBoxNode = document.querySelector("#myBox form button");
     //divBoxNode.addEventListener("click", buttomPressed, false);
@@ -35,6 +33,45 @@ var MessageBoard = {
     
 
   },
+
+    time: function (e) {
+      var e = e;     
+      e.preventDefault();      
+      
+      var className = e.target.parentNode.childNodes[0].className;     
+      var arrID = className;     
+     
+      var arrId = arrID.charAt(arrID.length -1);
+      var arridd = parseInt(arrId);
+
+      var fullTime = MessageBoard.messages[arridd].getDateText();
+      var nowTime = fullTime.toLocaleTimeString();
+      var date = fullTime.getDate();
+      //var month = fullTime.getMonth() +1;
+      var year = fullTime.getFullYear();
+
+      var d=new Date();
+      var month=new Array();
+      month[0]="January";
+      month[1]="February";
+      month[2]="March";
+      month[3]="April";
+      month[4]="May";
+      month[5]="June";
+      month[6]="July";
+      month[7]="August";
+      month[8]="September";
+      month[9]="October";
+      month[10]="November";
+      month[11]="December";
+      var n = month[d.getMonth()];
+    
+      alert("Inlägget skapades den " +date+ " " +n+ " " +year+ " klockan " +nowTime);
+
+
+
+
+    },
 
     removeMessage: function (e) {
       var e = e;     
@@ -60,8 +97,7 @@ var MessageBoard = {
      // console.log(this.message.slice(arrId));
       //console.log(e.messages);
       
-
-
+      MessageBoard.counter();
       
     },
 
@@ -121,18 +157,27 @@ var MessageBoard = {
     var p = document.createElement("p");
     var time = document.createElement("time");
     //var txt = document.createTextNode(messages[i].getText());
-    p.innerHTML = MessageBoard.messages[i].getHTMLText();
-    time.innerHTML = MessageBoard.messages[i].getDateText();    
+    p.innerHTML = MessageBoard.messages[i].getHTMLText();    
+    var fullTime = MessageBoard.messages[i].getDateText();
+    time.innerHTML = fullTime.toLocaleTimeString(); 
     
     p.appendChild(time);
     li.appendChild(p);
     //p.appendChild(txt);
-
+    
     //länkar in bild i p tag för radering
     var imgClose = document.createElement("img");
+    var imgTime = document.createElement("img");
+
+        
+
     li.appendChild(imgClose);
+    li.appendChild(imgTime);
+
     imgClose.src="pic/delete.png";
+    imgTime.src="pic/time.png";    
     imgClose.alt="Delete";
+    imgTime.alt="Time";
     //Lägger till class för id erase
     var idToPClass = i;
     p.className="pClass"+idToPClass; 
@@ -149,6 +194,10 @@ var MessageBoard = {
       return false;
     };
 
+    imgTime.onclick = function (e) {
+      MessageBoard.time(e);
+      return false;
+    };
     
     
     

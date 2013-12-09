@@ -37,7 +37,7 @@ function Message(message, date){
     };   
 
     Message.prototype.getDateText = function(){
-        return this.getDate().toLocaleString();
+        return this.getDate();//.toLocaleTimeString();
     };
 
     /*
