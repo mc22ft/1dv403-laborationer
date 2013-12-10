@@ -28,16 +28,37 @@ var MessageBoard = {
 
     //var imgNode = document.querySelector("#newMessage ul li img");
     //Raderar! var x=document.getElementsByTagName('body')[0];om jag tror rätt så är detta classnamnet och sen child där på
-     
+    
+    var texten = document.getElementById("myText");
+    
+    texten.onkeypress = function (e) {
+      var key = e.keyCode;
+      
+      if(key === 13 && e.shiftKey){
+        //texten.value += "\n";
+        console.log("shift enter");
+        return true;
+      }
+      if(key === 13){
+        //texten.value = "";
+        console.log("enter");
+        MessageBoard.buttomPressed();             
+        return false;
+      }
+      
+      return true;
+      
+      
+
+      
+    };   
+
 
     
 
   },
 
-    pressKeys: function () {
-      alert("tangent tryckt!!!");
-    },
-
+    
     time: function (e) {
       var e = e;     
       e.preventDefault();      
@@ -134,16 +155,7 @@ var MessageBoard = {
     var texten = document.getElementById("myText");
     
 
-
-    var showKeyPress;
-    texten.onkeypress = showKeyPress;
-    function showKeyPress(e){
-      if(!e)
-      {
-        var e = window.event;
-      console.log(showKeyPress(e);}
-      return false;
-    };
+   
     
 
 
