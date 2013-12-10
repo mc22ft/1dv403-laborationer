@@ -38,3 +38,31 @@ footer {
 	height:40px; /* height must be smaller then .page's bottom padding */
 
 }
+
+/*--- Här är css för in texten! ---*/
+
+#newMessage ul li {	
+	margin:auto;
+	margin-left: 228px;
+	margin-right: 267px;
+	margin-top: 5px;
+	background-color: white;
+	border: 1px solid #ABB39E;
+	padding: 0 0 0 0;
+	list-style: none;
+}
+
+#newMessage ul li time {
+	float:right;
+	margin-right: 5px
+}
+#newMessage ul li p {
+	word-wrap:break-word;
+}
+#newMessage ul li img {
+	width: 20px
+
+}
+#newMessage ul li time:1 {
+
+}

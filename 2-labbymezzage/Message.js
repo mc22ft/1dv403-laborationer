@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 
 //konstruktor function
 function Message(message, date){

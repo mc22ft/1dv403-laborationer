@@ -19,7 +19,7 @@ var MessageBoard = {
     //Knapp tryck
     //var buttomNode = textareaNode.childNodes[3];    
     divBoxNode.onclick = function () {
-      console.log("onclick");
+    
       MessageBoard.buttomPressed(); //anonym function return false
       
       return false;
@@ -35,12 +35,12 @@ var MessageBoard = {
       var key = e.keyCode;
       
       if(key === 13 && e.shiftKey){
-        //texten.value += "\n";
+        
         console.log("shift enter");
         return true;
       }
       if(key === 13){
-        //texten.value = "";
+       
         console.log("enter");
         MessageBoard.buttomPressed();             
         return false;
@@ -63,7 +63,7 @@ var MessageBoard = {
       var e = e;     
       e.preventDefault();      
       
-      var className = e.target.parentNode.childNodes[0].className;     
+      var className = e.target.parentNode.childNodes[1].className;     
       var arrID = className;     
      
       var arrId = arrID.charAt(arrID.length -1);
@@ -103,12 +103,14 @@ var MessageBoard = {
         e.preventDefault();
         
         //Tar bort elementen
-        var className = e.target.parentNode.childNodes[0].className;     
+        var className = e.target.parentNode.childNodes[1].className;     
         var arrID = className; 
         var element = document.getElementsByClassName(className);      
-        console.log(element[0].parentNode);
+        
         element[0].parentNode.innerHTML="";
         
+
+
         //Tar bort från array
         var arrId = arrID.charAt(arrID.length -1)
         var arridd = parseInt(arrId)
@@ -131,9 +133,11 @@ var MessageBoard = {
 
     var div = document.querySelector("#myBox");
     var p = document.createElement("p");
-    p.className = "pCounter";
+    //p.className = "pCounter";
     p.innerHTML = "Antal meddelande:";
     div.appendChild(p);
+    
+
     },
     //MessageBoard.counter();
 
@@ -153,16 +157,8 @@ var MessageBoard = {
   buttomPressed: function () {
     console.log("knappt tryckt");
     var texten = document.getElementById("myText");
-    
-
-   
-    
-
-
-
-
     var inputText = texten.value;
-
+    texten.value = "";
     var myMessObj = new Message(inputText, new Date()); //Formatera datumet!!
     MessageBoard.messages.push(myMessObj);
 
@@ -187,7 +183,7 @@ var MessageBoard = {
      //Ritat upp meddelande strukturen
   renderMessage: function (i) {
     var  ul = document.querySelector("#newMessage ul");
-    var li = document.createElement("li");
+    var li = document.createElement("li");    
     var p = document.createElement("p");
     var time = document.createElement("time");
     //var txt = document.createTextNode(messages[i].getText());
@@ -195,7 +191,7 @@ var MessageBoard = {
     var fullTime = MessageBoard.messages[i].getDateText();
     time.innerHTML = fullTime.toLocaleTimeString(); 
     
-    p.appendChild(time);
+    li.appendChild(time);
     li.appendChild(p);
     //p.appendChild(txt);
     
@@ -215,7 +211,7 @@ var MessageBoard = {
     //Lägger till class för id erase
     var idToPClass = i;
     p.className="pClass"+idToPClass; 
-    
+    li.className = "liClass"+idToPClass;
 
     //kopplar ihop allt 
     ul.appendChild(li);
