@@ -1,27 +1,17 @@
 "use strict"
 
-var Memory = {
+function Memory(random){	//Konstruktor function
 
-	init: function () {
-
-		var myArray = [3,4,4,1,2,1,2,3];
-
-		console.log(myArray);
-
-
-
+	//Egenskaper dör random
+	this.getRandom = function () {
+		return random;
 	},
-//---Functioner ---
 
+	this.setRandom = function (_random) {
+		random = _random;
+	},
 
+	this.setRandom(random);
 
+}
 
-
-
-
-
-
-
-
-};
-window.onload = Memory.init;
