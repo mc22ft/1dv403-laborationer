@@ -28,12 +28,14 @@ var MemoryBoard = {
 	makeElement: function(myRandomArr){
 		var div = document.getElementById("divTable");
 		var td = document.createElement("td");
+		var i;
 		
-		for (var i = myRandomArr.length - 1; i >= 0; i--) {			
-		
+		for (i = myRandomArr.length - 1; i >= 0; i--) {			
+		var nrPic = myRandomArr[i];
 		var a = document.createElement("a");
+		a.href="#";
 		var img = document.createElement("img");
-		img.src="pics/0.png", img.alt="?";
+		img.src="pics/"+nrPic+".png", img.alt="?";
 
 		td.appendChild(a);
 		a.appendChild(img);
