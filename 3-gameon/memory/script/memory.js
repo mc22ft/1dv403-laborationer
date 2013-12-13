@@ -12,6 +12,6 @@ function Memory(random){	//Konstruktor function
 	},
 
 	this.setRandom(random);
-
+	
 }
 
