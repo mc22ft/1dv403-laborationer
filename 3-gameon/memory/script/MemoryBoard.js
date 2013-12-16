@@ -7,6 +7,7 @@ var classTag;
 var oldTarget;
 var winCount;
 var innerWinCount = 0;
+var mainClickCounter = 0;
 
 var MemoryBoard = {
 
@@ -86,14 +87,16 @@ var MemoryBoard = {
 			//if klick så det ska funka - click1 = click2 
 			if(clickOne === clickTwo){
 				++innerWinCount;
+				++mainClickCounter;
 				console.log("Grattis! Ett par vänt.")
-				
+
 				if (winCount === innerWinCount){
 					console.log("Grattis du har vunnit spelet!!!");
 
-
+					var div = document.getElementById("divTable");
 					var p = document.createElement("p");
-					p.innerHTML = "Grattis du klarade av spelet!";
+					div.appendChild(p);
+					p.innerHTML = "Grattis du klarade av spelet på " + mainClickCounter + " försök!";
 				
 				};
 				//Nollställer räknare 
@@ -104,6 +107,7 @@ var MemoryBoard = {
 				{
 					//Timer
 					clickCount = 3;
+					++mainClickCounter;
 					setTimeout(function(){						
 						oldTarget.setAttribute("src", "pics/0.png");
 						e.target.setAttribute("src", "pics/0.png");
@@ -147,7 +151,7 @@ var MemoryBoard = {
 
 
 		div.appendChild(td);
-		div.appendChild(p);
+		
 		console.log(divTable);
 
 	},
