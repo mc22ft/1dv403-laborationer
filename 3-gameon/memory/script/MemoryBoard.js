@@ -4,6 +4,7 @@ var clickOne;
 var clickTwo;
 var clickCount = 0;
 var classTag;
+var oldTarget;
 
 var MemoryBoard = {
 
@@ -43,34 +44,64 @@ var MemoryBoard = {
 		
 		var aTagNumber = parseInt(e.target.parentNode.className);
 
-		var oldAttribute = e.target.getAttribute("src")		
+		var oldNodeTarget = e.target;
+
+		console.log(e.target);	
 		
 		var ArrPlace = MemoryBoard.randomArr[aTagNumber];
 
 		e.target.setAttribute("src", "pics/"+ArrPlace+".png");
 		console.log("På plars nummer " +aTagNumber+ " i Arrayen finns detta nummer: "+ArrPlace);
-		//console.log(ArrPlace);
+		//console.log();
 
 
-		MemoryBoard.compare(ArrPlace, aTagNumber);
+		MemoryBoard.compare(ArrPlace, aTagNumber, e, oldNodeTarget);
 
 	},
 
-	compare: function(numberToCompare, aTagNumber){
+	compare: function(ArrPlace, aTagNumber, e, oldNodeTarget){
 		// Counter
-		if (clickCount === 0){
-			clickOne = numberToCompare;
-			classTag = aTagNumber;
-
-		};
+		++clickCount;
 		if (clickCount === 1){
-			clickTwo = numberToCompare;
-			//if med om samma klass nummer 
+			clickOne = ArrPlace;
+			classTag = aTagNumber;
+			oldTarget = oldNodeTarget
+		};
+
+		if (clickCount === 2){
+			clickTwo = ArrPlace;
+			
+			//if klick på samma nummer
 			if (classTag === aTagNumber){
 				console.log("Du kan inte klicka på samma bild");
+				--clickCount;
 				return false;								
 			};
-			//if med om click1 0 click2 
+			//if klick så det ska funka - click1 = click2 
+			if(clickOne === clickTwo){
+				
+				console.log("Grattis! Ett par vänt.")
+
+				//Ta bort från array?
+
+			}
+			else
+				{
+					//Timer
+					setTimeout(function(){
+						oldTarget.setAttribute("src", "pics/0.png");
+						e.target.setAttribute("src", "pics/0.png");
+					}, 1000);
+
+					console.log(clickOne);
+					//vända tillbaka om det inte är samma
+					
+
+
+				};
+
+			
+			
 		};
 
 		
@@ -81,11 +112,13 @@ var MemoryBoard = {
 
 		console.log(clickCount);
 		
+		if(clickCount === 2){
+				clickCount = 0;
+			};
+
+
+
 		
-
-
-
-		++clickCount
 	},
 
 
