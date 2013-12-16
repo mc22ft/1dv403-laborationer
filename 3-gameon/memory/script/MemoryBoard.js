@@ -5,6 +5,8 @@ var clickTwo;
 var clickCount = 0;
 var classTag;
 var oldTarget;
+var winCount;
+var innerWinCount = 0;
 
 var MemoryBoard = {
 
@@ -15,19 +17,24 @@ var MemoryBoard = {
 
 		MemoryBoard.startGame();
 
+		console.log(winCount);
 
-
-		//------ Ovanför detta är bara test!!!!!!!'
-
+		
 
 		MemoryBoard.makeElement();
+
+		
 
 		var aLinks = document.getElementsByTagName("a");
 		console.log(aLinks);
 		
 		for(var i=0;i<aLinks.length;i++){
       		aLinks[i].onclick= function (e){
-      			MemoryBoard.clickFunction(e);
+      			
+      			if (clickCount < 3){
+      				++clickCount;
+      				MemoryBoard.clickFunction(e);
+      			};
       			return false;
       		};
     	}
@@ -36,17 +43,15 @@ var MemoryBoard = {
 	},
 						//---Functioner ---
 
-	clickFunction: function(e){
+	clickFunction: function(e){		
+		
 		var e = e;
 		e.preventDefault();
 		//console.log("Class Namn:");
 		//console.log(e.target.parentNode.className);
 		
 		var aTagNumber = parseInt(e.target.parentNode.className);
-
-		var oldNodeTarget = e.target;
-
-		console.log(e.target);	
+		var oldNodeTarget = e.target;			
 		
 		var ArrPlace = MemoryBoard.randomArr[aTagNumber];
 
@@ -56,12 +61,13 @@ var MemoryBoard = {
 
 
 		MemoryBoard.compare(ArrPlace, aTagNumber, e, oldNodeTarget);
+		
 
 	},
 
 	compare: function(ArrPlace, aTagNumber, e, oldNodeTarget){
-		// Counter
-		++clickCount;
+		
+		
 		if (clickCount === 1){
 			clickOne = ArrPlace;
 			classTag = aTagNumber;
@@ -79,46 +85,38 @@ var MemoryBoard = {
 			};
 			//if klick så det ska funka - click1 = click2 
 			if(clickOne === clickTwo){
-				
+				++innerWinCount;
 				console.log("Grattis! Ett par vänt.")
+				
+				if (winCount === innerWinCount){
+					console.log("Grattis du har vunnit spelet!!!");
 
-				//Ta bort från array?
+
+					var p = document.createElement("p");
+					p.innerHTML = "Grattis du klarade av spelet!";
+				
+				};
+				//Nollställer räknare 
+				clickCount = 0;	
 
 			}
 			else
 				{
 					//Timer
-					setTimeout(function(){
+					clickCount = 3;
+					setTimeout(function(){						
 						oldTarget.setAttribute("src", "pics/0.png");
 						e.target.setAttribute("src", "pics/0.png");
+						clickCount = 0;
 					}, 1000);
 
-					console.log(clickOne);
-					//vända tillbaka om det inte är samma
-					
-
-
-				};
-
-			
-			
+					//console.log(clickOne);
+					//vända tillbaka om det inte är samma		
+				};			
 		};
 
-		
-
-
-
-
-
 		console.log(clickCount);
-		
-		if(clickCount === 2){
-				clickCount = 0;
-			};
-
-
-
-		
+			
 	},
 
 
@@ -147,8 +145,11 @@ var MemoryBoard = {
 
 		};
 
+
 		div.appendChild(td);
+		div.appendChild(p);
 		console.log(divTable);
+
 	},
 
 	startGame: function(){
@@ -165,7 +166,8 @@ var MemoryBoard = {
 		var exmpel = new Memory(MemoryBoard.randomArr);
 		console.log(MemoryBoard.randomArr);
 
-
+		//Ställer in räknare så att spelet vet när det är klart.
+		winCount = MemoryBoard.randomArr.length / 2;
 
 	},
 
