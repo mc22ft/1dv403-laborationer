@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>    
+    <meta charset="utf-8" />  
+
+    <title>Message board</title>
+        
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+     <!-- Bootstrap -->
+    <link  href="dist/css/bootstrap.min.css" rel="stylesheet"></head>
+<body>   
+    <header>
+       
+
+        <form role="form" action="http://voyager.lnu.se/tekinet/kurser/dtt/wp_webbteknik/process_form.php" method="post">           
+            <fieldset>
+
+             <legend>Betalningsplan</legend>
+<!--Förnamn-->
+            <div class="form-group">
+                <label for="f-name">Förnamn</label>
+                <input type="text" class="form-control" id="f-name" name="Förnamn:" placeholder="Förnamn">
+            </div>
+
+<!--EfterNamn-->
+            <div class="form-group">
+                <label for="e-name">Efternamn</label>
+                <input type="text" class="form-control" id="e-name" name="Efternamn:" placeholder="Efternamn">
+            </div>
+
+<!--Postnummer-->
+            <div class="form-group">
+                <label for="postnumber">Postnummer</label>
+                <input type="text" class="form-control" id="postnumber" name="Postnummer" placeholder="Postnummer">
+            </div>
+<!--E-post-->
+            <div class="form-group">
+                <label for="email">E-post</label>
+                <input type="text" class="form-control" id="email" name="E-post:" placeholder="E-post">
+            </div>
+
+
+<!--Prismodell drop down-->
+          
+            <div class="control-group">
+                <label class="control-label" for="selectbasic">Prismodell</label>
+                <div class="controls">
+                    <select id="selectbasic" name="Prismodell" class="form-control">
+                        <option>Låg</option>
+                        <option>Medium</option>
+                        <option>Hög</option>                       
+                    </select>
+                </div>
+            </div>
+
+<!--Genomför löp-->
+<button type="submit" class="btn btn-success">Genomför köp</button>
+         </fieldset>     
+        </form>
+        
+
+    </header>
+
+    <!-- Footer bottom -->
+
+    <footer>
+           
+    </footer>   
+
+    <!-- javascipt 
+    
+    <script type="text/javascript" src="script/MemoryBoard.js"></script>
+    <script type="text/javascript" src="script/Memory.js"></script>
+    <script type="text/javascript" src="script/Random.js"></script>    -->
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="dist/js/bootstrap.min.js"></script>
+</body>
+</html>
