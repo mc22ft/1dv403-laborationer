@@ -1,4 +1,4 @@
-"use strict"
+"use strict"		//Boken 
 
 
 var Validator = {
@@ -15,17 +15,32 @@ var Validator = {
 				event = EventUtil.getEvent(event);
 			
 				EventUtil.preventDefault(event);
-
+				//Hämtar från formulär
+				Validator.getFormInfo(form);
 			});
+	},
 
-			
-
+	getFormInfo: function(form){
+		var fName = form.elements["f-name"].value;//här e jag sidan 515 i boken
+		var lName = form.elements["l-name"].value;
+		var postNr = form.elements["postnumber"].value;
+		var mail = form.elements["email"].value;
+		
+		console.log(fName);
+		console.log(lName);
+		console.log(postNr);
+		console.log(mail);
 	},
 
 
-};
 
-var EventUtil = {
+
+
+};
+//form.submit();
+//form.reset();
+
+var EventUtil = {    //RemoveHandler sidan 441 i boken
 
 	addHandler: function(element, type, handler){
 		if(element.addEventListener){
