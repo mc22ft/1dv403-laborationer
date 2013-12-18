@@ -22,7 +22,17 @@ var MemoryBoard = {
 		var aLinks = document.getElementsByTagName("a");
 		
 		for(var i=0;i<aLinks.length;i++){
-      		aLinks[i].onclick= function (e){      			
+
+			aLinks[i].onkeypress = function (e){      			
+      			if (clickCount < 3){
+      				//e = e.target.childNodes[0];
+      				++clickCount;
+      				MemoryBoard.clickFunction(e);
+      			};
+      			return false;
+      		};
+
+      		aLinks[i].onclick = function (e){      			
       			if (clickCount < 3){
       				++clickCount;
       				MemoryBoard.clickFunction(e);
