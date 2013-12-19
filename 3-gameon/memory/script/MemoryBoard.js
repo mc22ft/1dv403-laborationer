@@ -8,6 +8,7 @@ var oldTarget;
 var winCount;
 var innerWinCount = 0;
 var mainClickCounter = 0;
+var oldClick;
 
 var MemoryBoard = {
 
@@ -32,7 +33,7 @@ var MemoryBoard = {
       			return false;
       		};
 
-      		aLinks[i].onclick = function (e){      			
+      		aLinks[i].onclick = function (e){     			
       			if (clickCount < 3){
       				++clickCount;
       				MemoryBoard.clickFunction(e);
@@ -58,6 +59,11 @@ var MemoryBoard = {
 
 	compare: function(ArrPlace, aTagNumber, e, oldNodeTarget){	
 		
+		if(oldClick === ArrPlace){
+			--clickCount;
+			return false;
+		};
+		
 		if (clickCount === 1){
 			clickOne = ArrPlace;
 			classTag = aTagNumber;
@@ -76,8 +82,8 @@ var MemoryBoard = {
 			//if klick så det ska funka - click1 = click2 
 			if(clickOne === clickTwo){
 				++innerWinCount;
-				++mainClickCounter;			
-
+				++mainClickCounter;
+				oldClick = clickOne;
 				if (winCount === innerWinCount){
 					var div = document.getElementById("divTable");
 					var p = document.createElement("p");

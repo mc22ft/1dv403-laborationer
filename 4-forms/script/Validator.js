@@ -1,9 +1,15 @@
-"use strict"		//Boken 
+"use strict"
 
+	var fName;
+	var lName;
+	var postNr;
+	var eMail;
 
 var Validator = {
 
-	init: function(){
+	formArr: [],
+
+	init: function(e){
 
 		var form = document.forms["payForm"];
 
@@ -17,23 +23,94 @@ var Validator = {
 				EventUtil.preventDefault(event);
 				//Hämtar från formulär
 				Validator.getFormInfo(form);
-			});
+
+				Validator.notEmptyTest(form); 
+
+				Validator.testPostNumber(form);
+
+				Validator.testEmail(form);
+
+				Validator.popUp(form);
+
+		});
+	},
+
+	popUp: function(form){
+
+		//sätt en div över direkt under bodu taggen
+		//ny div i den nya diven som blir popupen
+
 	},
 
 	getFormInfo: function(form){
-		var fName = form.elements["f-name"].value;//här e jag sidan 515 i boken
-		var lName = form.elements["l-name"].value;
-		var postNr = form.elements["postnumber"].value;
-		var mail = form.elements["email"].value;
+		fName = form.elements["fname"].value;//här e jag sidan 515 i boken
+		lName = form.elements["lname"].value;
+		postNr = form.elements["postnumber"].value;
+		eMail = form.elements["email"].value;
 		
-		console.log(fName);
-		console.log(lName);
-		console.log(postNr);
-		console.log(mail);
+		this.formArr.push(fName, lName, postNr, eMail);
+
+		console.log(this.formArr);
+		
+
 	},
 
+	notEmptyTest: function(form){
+		var i;
+		var x = 1;
+		for (i = 0;this.formArr.length > i  ; i++) {
+				console.log(this.formArr[i]);
+			
 
 
+				//Om det är tomt i fälten
+			if (this.formArr[i] === ""){
+				var input = form[x];
+				var p = document.createElement("p");
+				var text = document.createTextNode("Detta fält får inte lämnas blankt");
+				p.appendChild(text);
+				input.appendChild(p);
+				//createTextNode.
+				console.log(form[x]);
+				x++;
+			};
+		};		
+	},
+
+	testPostNumber: function(form){
+
+		
+		var str = postNr.replace(" ", "")
+		var pattern1 = /se\d{5}|\d{3}-\d{2}/i; //  /s = radbrytning /^[se]?|\d{5}|\d{3}[-]?\d{2}/i
+		if(pattern1.test(str)){
+
+			console.log("str: " +str);
+			
+			//alert(RegExp.lastMatch);
+
+		}
+		else
+			{
+				alert("Ditt post nummer är inte i rätt format!");
+			};
+
+
+	},
+
+	testEmail: function(form){
+
+		var pattern2 = /^([^.]|\s)(\w|[\-])*?[@][a-zåäö0-9.]+?[a-z]{2,}$/;
+		//var pattern3 = /^(?!\.)(\w|-|\.){1,64}(?!\.)[-.a-zåäö-9]{4,253}$/;
+		var pattern4 = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+		if(pattern4.test(eMail)) {
+			console.log("email funkar bra!")
+		}
+		else {
+			alert("Mail adressen är inte i rätt format!");
+		};
+
+
+	},
 
 
 };
