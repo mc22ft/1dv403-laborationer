@@ -37,12 +37,46 @@ var Validator = {
 
 	popUp: function(form){
 
+		var body = document.getElementsByTagName("body")[0];		
+		var div = document.createElement('div');
+		div.setAttribute("id", "blurDiv"); 
+		div.appendChild(body.cloneNode(true)); 
+		body.parentNode.replaceChild(div, body);
+
+		Validator.makePopup();
+
+
 		//sätt en div över direkt under bodu taggen
 		//ny div i den nya diven som blir popupen
 
 	},
 
+	makePopup: function(){
+		var body = document.getElementsByTagName("body")[0];
+		var div = document.createElement('div');
+		div.setAttribute("id", "popDiv"); 
+		div.appendChild(body.cloneNode(true)); 
+		body.parentNode.replaceChild(div, body);
+
+		//Texten
+		var h3 = document.createElement("h3");
+		var h3Text = document.createTextNode("Vänligen bekräfta ditt köp");
+		h3.appendChild(h3Text);
+		var xButton = document.createElement("button");
+		xButton.setAttribute("type", "submit");
+		
+		//xButton.setAttribute("id", "closeButton")
+		//document.getElementById("closeButton").value="close";
+		div.appendChild(h3);
+		div.appendChild(xButton);
+		
+
+
+	},
+
 	getFormInfo: function(form){
+
+		this.formArr.length = 0;
 		fName = form.elements["fname"].value;//här e jag sidan 515 i boken
 		lName = form.elements["lname"].value;
 		postNr = form.elements["postnumber"].value;
@@ -99,7 +133,7 @@ var Validator = {
 
 	testEmail: function(form){
 
-		var pattern2 = /^([^.]|\s)(\w|[\-])*?[@][a-zåäö0-9.]+?[a-z]{2,}$/;
+		//var pattern2 = /^([^.]|\s)(\w|[\-])*?[@][a-zåäö0-9.]+?[a-z]{2,}$/;
 		//var pattern3 = /^(?!\.)(\w|-|\.){1,64}(?!\.)[-.a-zåäö-9]{4,253}$/;
 		var pattern4 = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 		if(pattern4.test(eMail)) {

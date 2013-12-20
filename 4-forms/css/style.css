@@ -8,11 +8,32 @@ body {
 }
 
 #payForm {
-	width: 40%;
+	z-index: -1;
+	width: 80%;
+	
+
 }
 form {
 	float:left;
 }
 button {
 	float:right;
+}
+
+#blurDiv {
+	z-index: 1000;
+	opacity:0.2;
+	
+	background-color: blue;
+}
+
+#popDiv {
+  z-index: 2000;
+  width:400px;
+  height:180px;
+  margin:30px 50px;
+  background-color:red;
+  border:1px solid black;
+  
+  
 }
