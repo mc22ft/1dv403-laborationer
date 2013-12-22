@@ -4,6 +4,7 @@
 	var lName;
 	var postNr;
 	var eMail;
+	var trueORfalse;
 
 var Validator = {
 
@@ -24,13 +25,32 @@ var Validator = {
 				//Hämtar från formulär
 				Validator.getFormInfo(form);
 
-				Validator.notEmptyTest(form); 
+				Validator.notEmptyTest(form);			
 
-				Validator.testPostNumber(form);
 
-				Validator.testEmail(form);
+				if (trueORfalse){
+					
+					Validator.popUp(form);
 
-				Validator.popUp(form);
+					var buttonA = document.getElementById("buttonAvbryt");
+					var buttonB = document.getElementById("buttonOk");
+
+					buttonA.addEventListener("click", function(){
+						//Tar bort popup
+						var divBlur = document.getElementById("blurDiv");
+						divBlur.parentNode.removeChild(divBlur);
+						for (var i = form.elements.length - 1; i >= 0; i--) {
+							console.log("disable", i);
+							form.elements[i].disabled = false;
+					};
+
+					});
+					buttonB.addEventListener("click", function(){
+						//Skcika formulär
+						form.submit();
+					});
+
+				};
 
 		});
 	},
@@ -39,39 +59,64 @@ var Validator = {
 
 		var body = document.getElementsByTagName("body")[0];		
 		var div = document.createElement('div');
-		div.setAttribute("id", "blurDiv"); 
-		div.appendChild(body.cloneNode(true)); 
-		body.parentNode.replaceChild(div, body);
+		div.setAttribute("id", "blurDiv");
+		body.appendChild(div);		
 
-		Validator.makePopup();
-
-
-		//sätt en div över direkt under bodu taggen
-		//ny div i den nya diven som blir popupen
+		Validator.makePopup(form);
 
 	},
 
-	makePopup: function(){
-		var body = document.getElementsByTagName("body")[0];
+	makePopup: function(form){
+		var divBlur = document.getElementById("blurDiv");
 		var div = document.createElement('div');
-		div.setAttribute("id", "popDiv"); 
-		div.appendChild(body.cloneNode(true)); 
-		body.parentNode.replaceChild(div, body);
+		div.setAttribute("id", "popDiv");
+		divBlur.appendChild(div);		
 
 		//Texten
 		var h3 = document.createElement("h3");
 		var h3Text = document.createTextNode("Vänligen bekräfta ditt köp");
 		h3.appendChild(h3Text);
-		var xButton = document.createElement("button");
-		xButton.setAttribute("type", "submit");
+		var i;
+		var x = 1;
+		var ul = document.createElement("ul");
+		//Lista 1
+		for (i = 0;this.formArr.length > i  ; i++) {
+			var li = document.createElement("li");
+			li.appendChild(document.createTextNode(form[x].name));
+			ul.appendChild(li);
+			x++;
+		};
+		//Lista 2
+		for (i = 0;this.formArr.length > i  ; i++) {
+			var li = document.createElement("li");	
+			li.appendChild(document.createTextNode(this.formArr[i]));
+			ul.appendChild(li);
+			x++;
+		};
+
+		var button1 = document.createElement("button");
+		var button2 = document.createElement("button");
+		button1.setAttribute("type", "button");
+		button2.setAttribute("type", "button");
+		button1.setAttribute("class", "btn btn-danger");
+		button2.setAttribute("class", "btn btn-success");
+		button1.setAttribute("id", "buttonAvbryt");
+		button2.setAttribute("id", "buttonOk");
+		button1.appendChild(document.createTextNode("Avbryt"));
+		button2.appendChild(document.createTextNode("Bekräfta ditt köp"));
+
 		
-		//xButton.setAttribute("id", "closeButton")
-		//document.getElementById("closeButton").value="close";
 		div.appendChild(h3);
-		div.appendChild(xButton);
-		
+		div.appendChild(ul);
+		div.appendChild(button2);
+		div.appendChild(button1);
 
 
+		//Låser formulär
+		for (var i = form.elements.length - 1; i >= 0; i--) {
+			console.log("disable", i);
+			form.elements[i].disabled = true;
+		};
 	},
 
 	getFormInfo: function(form){
@@ -89,63 +134,71 @@ var Validator = {
 
 	},
 
-	notEmptyTest: function(form){
+	notEmptyTest: function(form){ //Test
 		var i;
 		var x = 1;
-		for (i = 0;this.formArr.length > i  ; i++) {
-				console.log(this.formArr[i]);
-			
+		var test;
+		trueORfalse = true;
+		
+		
+		
+			for (i = 0;this.formArr.length > i  ; i++) {
+					//if (x > 4){x = 1};
+					if (form[x].parentNode.childNodes[5])
+						{
+							console.log("P tagg finns");
+							var pRemove = form[x].parentNode.childNodes[5];
+							pRemove.parentNode.removeChild(pRemove);
+							
+						};
 
+						var idName = form.elements[x].getAttribute("id");
+						console.log(idName);
+					//Om det är tomt i fälten
+				//if (form.elements[i].getAttribute("class") = "form-control name"){					
+				if (idName == "fname"){
+					if (this.formArr[i] === ""){
+					Validator.writeOut(form, x, "Detta fält får inte lämnas blankt");
+					}
+				}
+				else if (idName == "lname"){
+					if (this.formArr[i] === ""){
+					Validator.writeOut(form, x, "Detta fält får inte lämnas blankt");
+					}
+				}
+				else if (idName == "postnumber"){
 
-				//Om det är tomt i fälten
-			if (this.formArr[i] === ""){
-				var input = form[x];
-				var p = document.createElement("p");
-				var text = document.createTextNode("Detta fält får inte lämnas blankt");
-				p.appendChild(text);
-				input.appendChild(p);
-				//createTextNode.
-				console.log(form[x]);
+						if (!/^(?:SE|SE )?(\d{5}|\d{3}(?: |-)\d{2})$/.test(this.formArr[i])) {
+						Validator.writeOut(form, x, "Postnummer är inte i rätt format");					
+						}
+				}
+				else if (idName == "email"){
+
+						if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(this.formArr[i])){
+						Validator.writeOut(form, x, "Du måste ange en gilltig email adress");						
+						}
+				};
+					
+				
+				
 				x++;
 			};
-		};		
-	},
-
-	testPostNumber: function(form){
-
-		
-		var str = postNr.replace(" ", "")
-		var pattern1 = /se\d{5}|\d{3}-\d{2}/i; //  /s = radbrytning /^[se]?|\d{5}|\d{3}[-]?\d{2}/i
-		if(pattern1.test(str)){
-
-			console.log("str: " +str);
 			
-			//alert(RegExp.lastMatch);
-
-		}
-		else
-			{
-				alert("Ditt post nummer är inte i rätt format!");
-			};
-
-
 	},
 
-	testEmail: function(form){
-
-		//var pattern2 = /^([^.]|\s)(\w|[\-])*?[@][a-zåäö0-9.]+?[a-z]{2,}$/;
-		//var pattern3 = /^(?!\.)(\w|-|\.){1,64}(?!\.)[-.a-zåäö-9]{4,253}$/;
-		var pattern4 = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-		if(pattern4.test(eMail)) {
-			console.log("email funkar bra!")
-		}
-		else {
-			alert("Mail adressen är inte i rätt format!");
-		};
-
-
+	writeOut: function (form, x, string){
+		var inPutString = string;
+		var input = form[x].parentNode;
+					var p = document.createElement("p");
+					var text = document.createTextNode(inPutString);
+					p.appendChild(text);
+					input.appendChild(p);
+					//createTextNode.
+								
+					
+					
+					trueORfalse = false;
 	},
-
 
 };
 //form.submit();
