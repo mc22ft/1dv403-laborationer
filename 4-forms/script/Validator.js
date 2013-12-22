@@ -14,24 +14,17 @@ var Validator = {
 
 		var form = document.forms["payForm"];
 
-			//var form = getElementById("payForm")
-
 			EventUtil.addHandler(form, "submit", function(event){
 				console.log("inne i addHandler");
-
-				event = EventUtil.getEvent(event);
-			
+				event = EventUtil.getEvent(event);			
 				EventUtil.preventDefault(event);
 				//Hämtar från formulär
 				Validator.getFormInfo(form);
-
-				Validator.notEmptyTest(form);			
-
-
-				if (trueORfalse){
-					
+				//Testar formulär
+				Validator.notEmptyTest(form);
+				//if true visar popup if false måste justera i formulär
+				if (trueORfalse){					
 					Validator.popUp(form);
-
 					var buttonA = document.getElementById("buttonAvbryt");
 					var buttonB = document.getElementById("buttonOk");
 
@@ -46,92 +39,88 @@ var Validator = {
 
 					});
 					buttonB.addEventListener("click", function(){
-						//Skcika formulär
+						//Skcika formul
+						for (var i = form.elements.length - 1; i >= 0; i--) {							
+							form.elements[i].disabled = false;
+					};
+						
 						form.submit();
 					});
-
 				};
-
 		});
 	},
 
 	popUp: function(form){
-
 		var body = document.getElementsByTagName("body")[0];		
 		var div = document.createElement('div');
 		div.setAttribute("id", "blurDiv");
-		body.appendChild(div);		
+		body.appendChild(div);
 
 		Validator.makePopup(form);
-
 	},
 
 	makePopup: function(form){
 		var divBlur = document.getElementById("blurDiv");
 		var div = document.createElement('div');
 		div.setAttribute("id", "popDiv");
-		divBlur.appendChild(div);		
-
+		divBlur.appendChild(div);
 		//Texten
 		var h3 = document.createElement("h3");
 		var h3Text = document.createTextNode("Vänligen bekräfta ditt köp");
 		h3.appendChild(h3Text);
 		var i;
 		var x = 1;
-		var ul = document.createElement("ul");
+		var divName = document.createElement("div");
+		divName.setAttribute("id", "divarrName")
+		var ulName = document.createElement("ul");
+		var divarrName = document.createElement("div");
+		divarrName.setAttribute("id", "divarrName");
+		var ularrName = document.createElement("ul");
 		//Lista 1
 		for (i = 0;this.formArr.length > i  ; i++) {
 			var li = document.createElement("li");
 			li.appendChild(document.createTextNode(form[x].name));
-			ul.appendChild(li);
+			ulName.appendChild(li);
 			x++;
 		};
 		//Lista 2
 		for (i = 0;this.formArr.length > i  ; i++) {
 			var li = document.createElement("li");	
 			li.appendChild(document.createTextNode(this.formArr[i]));
-			ul.appendChild(li);
+			ularrName.appendChild(li);
 			x++;
 		};
-
 		var button1 = document.createElement("button");
 		var button2 = document.createElement("button");
 		button1.setAttribute("type", "button");
-		button2.setAttribute("type", "button");
+		button2.setAttribute("type", "submit");
 		button1.setAttribute("class", "btn btn-danger");
 		button2.setAttribute("class", "btn btn-success");
 		button1.setAttribute("id", "buttonAvbryt");
 		button2.setAttribute("id", "buttonOk");
 		button1.appendChild(document.createTextNode("Avbryt"));
-		button2.appendChild(document.createTextNode("Bekräfta ditt köp"));
-
-		
+		button2.appendChild(document.createTextNode("Bekräfta ditt köp"));		
 		div.appendChild(h3);
-		div.appendChild(ul);
+		divName.appendChild(ulName);
+		divarrName.appendChild(ularrName);
+		div.appendChild(divName);
+		div.appendChild(divarrName);
 		div.appendChild(button2);
 		div.appendChild(button1);
 
-
 		//Låser formulär
-		for (var i = form.elements.length - 1; i >= 0; i--) {
-			console.log("disable", i);
+		for (var i = form.elements.length - 1; i >= 0; i--) {			
 			form.elements[i].disabled = true;
 		};
 	},
 
 	getFormInfo: function(form){
-
 		this.formArr.length = 0;
 		fName = form.elements["fname"].value;//här e jag sidan 515 i boken
 		lName = form.elements["lname"].value;
 		postNr = form.elements["postnumber"].value;
-		eMail = form.elements["email"].value;
-		
+		eMail = form.elements["email"].value;		
 		this.formArr.push(fName, lName, postNr, eMail);
-
-		console.log(this.formArr);
-		
-
 	},
 
 	notEmptyTest: function(form){ //Test
@@ -140,22 +129,18 @@ var Validator = {
 		var test;
 		trueORfalse = true;
 		
-		
-		
 			for (i = 0;this.formArr.length > i  ; i++) {
 					//if (x > 4){x = 1};
 					if (form[x].parentNode.childNodes[5])
 						{
 							console.log("P tagg finns");
 							var pRemove = form[x].parentNode.childNodes[5];
-							pRemove.parentNode.removeChild(pRemove);
-							
+							pRemove.parentNode.removeChild(pRemove);							
 						};
 
 						var idName = form.elements[x].getAttribute("id");
 						console.log(idName);
-					//Om det är tomt i fälten
-				//if (form.elements[i].getAttribute("class") = "form-control name"){					
+					//Om det är tomt i fälten									
 				if (idName == "fname"){
 					if (this.formArr[i] === ""){
 					Validator.writeOut(form, x, "Detta fält får inte lämnas blankt");
@@ -177,13 +162,9 @@ var Validator = {
 						if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(this.formArr[i])){
 						Validator.writeOut(form, x, "Du måste ange en gilltig email adress");						
 						}
-				};
-					
-				
-				
+				};				
 				x++;
-			};
-			
+			};			
 	},
 
 	writeOut: function (form, x, string){
@@ -192,17 +173,13 @@ var Validator = {
 					var p = document.createElement("p");
 					var text = document.createTextNode(inPutString);
 					p.appendChild(text);
-					input.appendChild(p);
-					//createTextNode.
-								
-					
-					
+					input.appendChild(p);				
 					trueORfalse = false;
 	},
 
 };
-//form.submit();
-//form.reset();
+
+//Jag gick efter boken med eventUtil. skulle nog inte gjort så från början
 
 var EventUtil = {    //RemoveHandler sidan 441 i boken
 
@@ -216,13 +193,10 @@ var EventUtil = {    //RemoveHandler sidan 441 i boken
 		else{
 			element["on", + type] = handler;
 		}
-	},
-
-	
+	},	
 	getEvent: function(event){
 		return event ? event :window.event;
 	},
-
 	preventDefault: function(event){
 		if(event.preventDefault){
 			event.preventDefault();
@@ -232,6 +206,4 @@ var EventUtil = {    //RemoveHandler sidan 441 i boken
 		}
 	},
 };
-
-
 window.onload = Validator.init;

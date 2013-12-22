@@ -1,15 +1,14 @@
+p {
+	color:red;
+}
 
-
-body {
-	
+body {	
 background-color: black;
 }
 
 #payForm {
 	z-index: -1;
 	width: 80%;
-	
-
 }
 form {
 	float:left;
@@ -18,22 +17,51 @@ button {
 	float:right;
 }
 
-#blurDiv {
-	position: absolute;
+#blurDiv {	
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, .75);
-
-
-
+	position:fixed !important;
+  	bottom:0;
 }
 
 #popDiv {
- 	
+ 	width: 400px;
+	padding-bottom: 130px;
+	background-color: white;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;  
+}
+
+#divarrName{
+	text-decoration: none;
+	float: left; width: 50%;
+	margin-right: -60px;
+}
+#divarrName ul {
+	list-style: none;
 	
-	background-color: red;
-  
-  
+}
+
+#divName {
+	float: right; width: 50%;
+}
+
+h3 {
+	margin-left: 30px;
+	padding-top: 10px;
+}
+
+#buttonAvbryt {
+	margin-right:30px;
+}
+#buttonOk {
+	margin-right: 60px;
+}
+
+html,body { height:100%; 
 }
 
 /*background-color: rgba(0, 0, 0, .75);*/
