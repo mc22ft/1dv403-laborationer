@@ -13,6 +13,29 @@ var Validator = {
 	init: function(e){
 
 		var form = document.forms["payForm"];
+		var textBox = form.elements["fname"];
+		var textbox2 = form.elements["lname"];
+
+		EventUtil.addHandler(textBox, "blur", function(event){
+			event = EventUtil.getEvent(event);
+			var target = EventUtil.getTarget(event);
+
+			alert("lämnar textboxen");
+
+		
+
+			fName = form.elements["fname"].value;
+			if (fName === ""){
+				Validator.writeOut(form, 1, "Detta fält får inte lämnas blankt");
+			}
+			else {
+				console.log("P tagg finns");
+				var pRemove = form[1].parentNode.childNodes[5];
+				pRemove.parentNode.removeChild(pRemove);
+			};
+
+
+		});
 
 			EventUtil.addHandler(form, "submit", function(event){
 				console.log("inne i addHandler");
@@ -115,7 +138,7 @@ var Validator = {
 	},
 
 	getFormInfo: function(form){
-		this.formArr.length = 0;
+		this.formArr.length = 0;		
 		fName = form.elements["fname"].value;//här e jag sidan 515 i boken
 		lName = form.elements["lname"].value;
 		postNr = form.elements["postnumber"].value;
@@ -196,6 +219,9 @@ var EventUtil = {    //RemoveHandler sidan 441 i boken
 	},	
 	getEvent: function(event){
 		return event ? event :window.event;
+	},
+	getTarget: function(event){
+		return event.target || event.srcElement;
 	},
 	preventDefault: function(event){
 		if(event.preventDefault){
