@@ -13,27 +13,95 @@ var Validator = {
 	init: function(e){
 
 		var form = document.forms["payForm"];
-		var textBox = form.elements["fname"];
+		var textBox1 = form.elements["fname"];
 		var textbox2 = form.elements["lname"];
+		var textbox3 = form.elements["postnumber"];
+		var textbox4 = form.elements["email"];
 
-		EventUtil.addHandler(textBox, "blur", function(event){
+		EventUtil.addHandler(textBox1, "blur", function(event){
 			event = EventUtil.getEvent(event);
-			var target = EventUtil.getTarget(event);
+			var target = EventUtil.getTarget(event);					
 
-			alert("lämnar textboxen");
-
-		
+			if (form[1].parentNode.childNodes[5])
+				{					
+					var pRemove = form[1].parentNode.childNodes[5];
+					pRemove.parentNode.removeChild(pRemove);							
+				};
 
 			fName = form.elements["fname"].value;
 			if (fName === ""){
 				Validator.writeOut(form, 1, "Detta fält får inte lämnas blankt");
 			}
-			else {
-				console.log("P tagg finns");
+			else {				
 				var pRemove = form[1].parentNode.childNodes[5];
 				pRemove.parentNode.removeChild(pRemove);
 			};
 
+		});
+
+		EventUtil.addHandler(textbox2, "blur", function(event){
+			event = EventUtil.getEvent(event);
+			var target = EventUtil.getTarget(event);			
+
+			if (form[2].parentNode.childNodes[5])
+				{					
+					var pRemove = form[2].parentNode.childNodes[5];
+					pRemove.parentNode.removeChild(pRemove);							
+				};	
+
+			fName = form.elements["lname"].value;
+			if (fName === ""){
+				Validator.writeOut(form, 2, "Detta fält får inte lämnas blankt");
+			}
+			else {				
+				var pRemove = form[2].parentNode.childNodes[5];
+				pRemove.parentNode.removeChild(pRemove);
+			};
+
+		});
+
+		EventUtil.addHandler(textbox3, "blur", function(event){
+			event = EventUtil.getEvent(event);
+			var target = EventUtil.getTarget(event);		
+
+			if (form[3].parentNode.childNodes[5])
+				{					
+					var pRemove = form[3].parentNode.childNodes[5];
+					pRemove.parentNode.removeChild(pRemove);							
+				};
+
+			postNr = form.elements["postnumber"].value;
+
+			if (!/^(?:SE|SE )?(\d{5}|\d{3}(?: |-)\d{2})$/.test(postNr)){
+				//if (fName === ""){
+					Validator.writeOut(form, 3, "Postnummer är inte i rätt format");					
+			}
+			else {				
+				var pRemove = form[3].parentNode.childNodes[5];
+				pRemove.parentNode.removeChild(pRemove);
+			};
+
+		});
+
+		EventUtil.addHandler(textbox4, "blur", function(event){
+			event = EventUtil.getEvent(event);
+			var target = EventUtil.getTarget(event);					
+
+			if (form[4].parentNode.childNodes[5])
+				{					
+					var pRemove = form[4].parentNode.childNodes[5];
+					pRemove.parentNode.removeChild(pRemove);							
+				};
+
+			eMail = form.elements["email"].value;
+
+			if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(eMail)){
+					Validator.writeOut(form, 4, "Du måste ange en gilltig email adress");						
+			}
+			else {			
+				var pRemove = form[4].parentNode.childNodes[5];
+				pRemove.parentNode.removeChild(pRemove);
+			};
 
 		});
 
