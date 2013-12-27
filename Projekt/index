@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>    
+    <meta charset="utf-8" />  
+
+    <title>Message board</title>
+        
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+</head>
+<body>   
+    <header>       
+
+
+    </header>
+
+    <!-- Footer bottom -->
+    <footer>
+        <div id="iconBottom">
+            <ul>
+                <li><img src="pics/photo2.png"></li>
+            </ul>
+        </div>
+           
+    </footer>
+    <!-- javascipt  -->   
+    <script src="script/script.js"></script>
+</body>
+</html>
