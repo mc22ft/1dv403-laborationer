@@ -35,3 +35,12 @@ footer {
 	position: ;
 	background-color: red;
 }
+#window {
+	position: relative;
+	background-color: white;
+	width:300px;
+	height: 400px;
+}
+#window img {
+	width: 6%;
+}
