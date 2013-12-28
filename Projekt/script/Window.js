@@ -1,6 +1,6 @@
 "use strict";
 
-MAINBORD.util.Window = function () {
+MAINBORD.util.Window = function () { //Skickar in data för info för varj fönser
 	//Bygger upp grunden på ett fönster!!!
 	//Toppen
 	var photoDiv = document.getElementsByClassName("photo")[0];	
@@ -30,7 +30,7 @@ MAINBORD.util.Window = function () {
 	photoDiv.appendChild(div);
 	
 
-	//div.style.width = "200px";
+	//div.style.width = "200px"; Lägger inte till så här, då det kommer i html koden.
 	//div.style.height = "300px";
 	//div.style.backgroundColor = "red";
 }
