@@ -11,7 +11,7 @@ console.log(callback);
 	xhr.onreadystatechange = function(){
 
 		var imgSpinn = document.getElementById("imgSpinn");
-		imgSpinn.setAttribute("src", "pics/159.GIF");
+		imgSpinn.setAttribute("src", "pics/spinn3.GIF");
 
 
 		console.log("inne i konstruk");

@@ -17,11 +17,21 @@ MAINBORD = {
 		//Klickar för att skapa ett nytt fönster
 		iconPhoto.addEventListener("click", function(){
 
-			MAINBORD.util.Window.makeEmptyWindow();			
-				
-			
-			
+			MAINBORD.util.Window.makeEmptyWindow();
+
+			//Klickar för att sttäga ett fömsert
+			var closeWin = document.getElementById("close");			
+			closeWin.addEventListener("click", function(event){
+
+				MAINBORD.util.Window.closeWindow(event);
+
+				return false;
+
+			});
+			return false;			
 		});
+
+		
 
 		//var myEmtyWindow2 = new MAINBORD.util.Window();
 

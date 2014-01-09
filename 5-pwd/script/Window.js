@@ -19,19 +19,29 @@ MAINBORD.util.Window = { //Skickar in data för info för varje fönser
 		var div = document.createElement("div");
 		div.setAttribute("id", "window");
 		var img = document.createElement("img");
-		img.setAttribute("src", "pics/photo.png")
-		var p1 = document.createElement("p");
+		img.setAttribute("src", "pics/photo.png");
+		img.setAttribute("id", "icon");
+		var p1 = document.createElement("p");http://www.google.se/imgres?espv=210&es_sm=93&biw=1185&bih=614&tbm=isch&tbnid=KFJV2uXxqiEzWM%3A&imgrefurl=http%3A%2F%2Fwww.iconarchive.com%2Fshow%2Fsleek-xp-software-icons-by-deleket%2FWindows-Close-Program-icon.html&docid=ITJ5LPsGKVyLRM&imgurl=http%3A%2F%2Ficons.iconarchive.com%2Ficons%2Fdeleket%2Fsleek-xp-software%2F256%2FWindows-Close-Program-icon.png&w=256&h=256&ei=WqvOUprzGIKH4ASb9YFo&zoom=1&ved=0CF8QhBwwBQ&iact=rc&dur=437&page=1&start=0&ndsp=17
 		p1.setAttribute("id", "p1");
-		p1.appendChild(document.createTextNode("Image viewer"));
-		var p2 = document.createElement("p");
-		p2.setAttribute("id", "p2");
-		p2.appendChild(document.createTextNode("x"));
+		p1.appendChild(document.createTextNode("IMAGE VIEWER"));
+
+
+		//alt a tag
+		var imgClose = document.createElement("img");
+		imgClose.setAttribute("src", "pics/Close-icon.png");
+		imgClose.setAttribute("id", "close");
+		
+
+
+		//var p2 = document.createElement("p");
+		//p2.setAttribute("id", "close");
+		//p2.appendChild(document.createTextNode("close"));
 		//Innehållet = mainDiv
 		var mainDiv = document.createElement("div");
 		mainDiv.setAttribute("id", "mainDiv");
-		var ul = document.createElement("ul");
-		ul.setAttribute("id", "innerUl");
-		mainDiv.appendChild(ul);
+		//var ul = document.createElement("ul");
+		//ul.setAttribute("id", "innerUl");
+		//mainDiv.appendChild(ul);
 
 		
 
@@ -42,7 +52,11 @@ MAINBORD.util.Window = { //Skickar in data för info för varje fönser
 		
 		div.appendChild(img);
 		div.appendChild(p1);
-		div.appendChild(p2);
+
+		div.appendChild(imgClose);
+
+
+		//div.appendChild(p2);
 		div.appendChild(mainDiv);
 		div.appendChild(imgSpinn);
 		photoDiv.appendChild(div);
@@ -109,9 +123,6 @@ MAINBORD.util.Window = { //Skickar in data för info för varje fönser
 			img.setAttribute("height", MAINBORD.util.Window.photoArray[i].thumbHeight);
 
 
-
-			
-
 			a.appendChild(img);
 			div.appendChild(a);
 			//li.appendChild(a);
@@ -125,6 +136,11 @@ MAINBORD.util.Window = { //Skickar in data för info för varje fönser
 		
 	},
 
+	closeWindow: function (e){		
+
+		var delDiv = document.getElementById("window").remove();
+
+	},
 
 
 
