@@ -35,16 +35,16 @@ MAINBORD.util.Window = { //Skickar in data för info för varje fönser
 
 		
 
-		//Botten
-		var p3 = document.createElement("p");
-		p3.setAttribute("id", "p3");
-		p3.appendChild(document.createTextNode("Footer Loader"));
+		//Botten Load bar
+		var imgSpinn = document.createElement("img");
+		imgSpinn.setAttribute("id", "imgSpinn");
+		//ajax-loader.appendChild(document.createTextNode("Footer Loader"));
 		
 		div.appendChild(img);
 		div.appendChild(p1);
 		div.appendChild(p2);
 		div.appendChild(mainDiv);
-		div.appendChild(p3);
+		div.appendChild(imgSpinn);
 		photoDiv.appendChild(div);
 
 		MAINBORD.util.Window.photoLinkClicked();
@@ -73,7 +73,7 @@ MAINBORD.util.Window = { //Skickar in data för info för varje fönser
 //Strukturerar in innehållet
 	makeInnerPhoto: function(myArr){		
 
-		var ul = document.getElementById("innerUl");
+		//var ul = document.getElementById("innerUl");
 		//scroll style på inner div
 		
 
@@ -85,21 +85,24 @@ MAINBORD.util.Window = { //Skickar in data för info för varje fönser
 
 		document.getElementById("mainDiv").style.overflow = "auto";
 		
+		var div = document.getElementById("mainDiv");
 
 
 		for (var i = MAINBORD.util.Window.photoArray.length - 1; i >= 0; i--) {
 			console.log("inne i for loop!!!");
 
-			var li = document.createElement("li");
+			//var li = document.createElement("li");
 
 			//Style på li
 
-			li.style.width = "80px";
-			li.style.height = "50px";
-			li.style.background = "red";
-			li.style.border = "1px solid black";
+			//li.style.width = "80px";
+			//li.style.height = "50px";
+			//li.style.background = "red";
+			//li.style.border = "1px solid black";
 			//alert(li.style.width);
 
+			var a = document.createElement("a");
+			a.setAttribute("href", MAINBORD.util.Window.photoArray[i].URL);
 			var img = document.createElement("img");
 			img.setAttribute("src", MAINBORD.util.Window.photoArray[i].thumbURL);
 			img.setAttribute("width", MAINBORD.util.Window.photoArray[i].thumbWidth);
@@ -109,9 +112,10 @@ MAINBORD.util.Window = { //Skickar in data för info för varje fönser
 
 			
 
-
-			li.appendChild(img);
-			ul.appendChild(li);
+			a.appendChild(img);
+			div.appendChild(a);
+			//li.appendChild(a);
+			//ul.appendChild(li);
 
 			
 

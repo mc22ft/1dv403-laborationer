@@ -9,12 +9,18 @@ console.log(callback);
 	var xhr = this.getXHR();
 
 	xhr.onreadystatechange = function(){
+
+		var imgSpinn = document.getElementById("imgSpinn");
+		imgSpinn.setAttribute("src", "pics/159.GIF");
+
+
 		console.log("inne i konstruk");
 		if(xhr.readyState === 4)
 		{
 			if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304)
 			{
 				callback(xhr.responseText);
+				var imgSpinn = document.getElementById("imgSpinn").removeAttribute("src");
 			}
 			else
 			{
@@ -22,7 +28,7 @@ console.log(callback);
 				console.log("läsfel, status:" + xhr.status);
 			}
 		}
-	};
+	};	
 
 	xhr.open("get", url, true);
 	//xhr.setRequestHeader('If-Modified', 'Mon, 01 Sep 2007 00:00:00 GMT');
