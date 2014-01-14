@@ -88,7 +88,11 @@ MAINBORD.util.Window = {
 	},
 
 	closeWindow: function (e){
-		var delDiv = document.getElementById("window").remove();
+		//var delDiv = document.getElementById("window").remove();
+
+		var delDiv = document.getElementById("window");
+                    delDiv.parentNode.removeChild(delDiv);
+
 	},
 
 	clickOnPhoto: function(e){		
