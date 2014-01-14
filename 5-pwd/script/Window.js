@@ -22,7 +22,7 @@ MAINBORD.util.Window = {
 
 			//alt a tag
 			var imgClose = document.createElement("img");
-			imgClose.setAttribute("src", "pics/Close-icon.png");
+			imgClose.setAttribute("src", "pics/Close-2-icon.png");
 			imgClose.setAttribute("id", "close");
 			
 			//Innehållet = mainDiv
