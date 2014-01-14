@@ -40,7 +40,6 @@ MAINBORD.util.Window = {
 			photoDiv.appendChild(div);
 
 			MAINBORD.util.Window.photoLinkClicked();
-
 		}
 	},
 
@@ -63,26 +62,42 @@ MAINBORD.util.Window = {
 	makeInnerPhoto: function(myArr){
 		//Gör innehållet i photo div scroll bart
 		document.getElementById("mainDiv").style.overflow = "auto";		
-		var div = document.getElementById("mainDiv");
-		var i;		
+		var div = document.getElementById("mainDiv"), 
+		
+		width = 0,		 
+		height = 0;
 
-		for (var i = MAINBORD.util.Window.photoArray.length - 1; i >= 0; i--) {
+		console.log(MAINBORD.util.Window.photoArray);
+			
+		for (var t in MAINBORD.util.Window.photoArray) {
+			if (MAINBORD.util.Window.photoArray[t].thumbWidth > width){
+				width = MAINBORD.util.Window.photoArray[t].thumbWidth;			
+			}
+			if (MAINBORD.util.Window.photoArray[t].thumbHeight > height) {
+				height = MAINBORD.util.Window.photoArray[t].thumbHeight;
+			}
+		}		
+
+		for (var j = MAINBORD.util.Window.photoArray.length - 1; j >= 0; j--) {
 			
 			var a = document.createElement("a");		
-			var img = document.createElement("img");
-			img.setAttribute("id", "Background");
-			img.setAttribute("className", i);
-			img.setAttribute("src", MAINBORD.util.Window.photoArray[i].thumbURL);
-			img.setAttribute("width", MAINBORD.util.Window.photoArray[i].thumbWidth);
-			img.setAttribute("height", MAINBORD.util.Window.photoArray[i].thumbHeight);
+			var img = document.createElement("img");			
+			img.setAttribute("className", j);
+			img.setAttribute("src", MAINBORD.util.Window.photoArray[j].thumbURL);
+			img.setAttribute("id", MAINBORD.util.Window.photoArray[j].URL);
 
+			//img.setAttribute("width", MAINBORD.util.Window.photoArray[j].thumbWidth);
+			//img.setAttribute("height", MAINBORD.util.Window.photoArray[j].thumbHeight);
+			img.setAttribute("style", "width:" + width + "px; height:" + height + "px;");
 			a.appendChild(img);
 			div.appendChild(a);
 			
 			img.onclick = function(e){
-					console.log("clickar på en bild för bakgrund");
-					MAINBORD.util.Window.clickOnPhoto(e);
-					return false;
+					if (!e){e = event};     
+        			e.preventDefault();
+
+					console.log(e.target.id);
+					MAINBORD.util.Window.clickOnPhoto(e.target.id);					
 				};
 		};		
 	},
@@ -95,13 +110,9 @@ MAINBORD.util.Window = {
 
 	},
 
-	clickOnPhoto: function(e){		
-		var e = e;     
-        e.preventDefault();
-       
-        var newBack = e.target.getAttribute("className");
-        var test = MAINBORD.util.Window.photoArray[newBack].URL;		
+	clickOnPhoto: function(image){
+			
 		var header = document.getElementsByTagName("header")[0];		
-		header.style.backgroundImage = "url(" + test + ")";			
+		header.style.backgroundImage = "url(" + image.toString() + ")";			
 	},
 };

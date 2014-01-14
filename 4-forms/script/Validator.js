@@ -79,6 +79,7 @@ var Validator = {
 			else {				
 				var pRemove = form[3].parentNode.childNodes[5];
 				pRemove.parentNode.removeChild(pRemove);
+
 			};
 
 		});
@@ -210,6 +211,8 @@ var Validator = {
 		fName = form.elements["fname"].value;//här e jag sidan 515 i boken
 		lName = form.elements["lname"].value;
 		postNr = form.elements["postnumber"].value;
+		postNr = postNr.replace("-", "");
+		postNr = postNr.replace(/se/gi, "");
 		eMail = form.elements["email"].value;		
 		this.formArr.push(fName, lName, postNr, eMail);
 	},
@@ -240,13 +243,12 @@ var Validator = {
 				else if (idName == "lname"){
 					if (this.formArr[i] === ""){
 					Validator.writeOut(form, x, "Detta fält får inte lämnas blankt");
-					}
+					}					
 				}
 				else if (idName == "postnumber"){
-
 						if (!/^(?:SE|SE )?(\d{5}|\d{3}(?: |-)\d{2})$/.test(this.formArr[i])) {
-						Validator.writeOut(form, x, "Postnummer är inte i rätt format");					
-						}
+						Validator.writeOut(form, x, "Postnummer är inte i rätt format");				
+						}						
 				}
 				else if (idName == "email"){
 
