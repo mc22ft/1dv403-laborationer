@@ -4,43 +4,38 @@ var MAINBORD = MAINBORD || {};
 MAINBORD.util = MAINBORD.util || {};
 MAINBORD.util.Window = MAINBORD.util.Window || {};
 
-MAINBORD = {
+MAINBORD = {	
 
-	
+	util: function(){		
+		
+		MAINBORD.makeElement();
 
-	util: function(){
-		//Array som lägger till objekten och tar bort
-		//ClickFunktion photo		
-
+		//ClickFunktion photo
 		var iconPhoto = document.getElementById("photo");
 		
 		//Klickar för att skapa ett nytt fönster
 		iconPhoto.addEventListener("click", function(){
-
 			MAINBORD.util.Window.makeEmptyWindow();
 
-			//Klickar för att sttäga ett fömsert
-			var closeWin = document.getElementById("close");			
+			//Klickar för att stäga ett fönster
+			var closeWin = document.getElementById("close");
+
 			closeWin.addEventListener("click", function(event){
-
+				
 				MAINBORD.util.Window.closeWindow(event);
-
+				
 				return false;
-
 			});
 			return false;			
-		});
-
-		
-
-		//var myEmtyWindow2 = new MAINBORD.util.Window();
+		});		
 
 	},
-
-	
+	//Lägger till bakgrunden på skrivbordet
+	makeElement: function(){
+		var header = document.getElementsByTagName("header")[0];		
+		header.style.backgroundImage="url(pics/brick.jpg)";
+		document.body.style.backgroundColor="black";		
+	},	
 
 };
 window.onload = MAINBORD.util;
-
-
-//Ändra bakgrunden http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_style_backgroundposition

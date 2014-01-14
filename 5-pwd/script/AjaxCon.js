@@ -10,21 +10,21 @@ console.log(callback);
 
 	xhr.onreadystatechange = function(){
 
+		//Lägger till loader gif
 		var imgSpinn = document.getElementById("imgSpinn");
 		imgSpinn.setAttribute("src", "pics/spinn3.GIF");
 
-
-		console.log("inne i konstruk");
+		
 		if(xhr.readyState === 4)
 		{
 			if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304)
 			{
 				callback(xhr.responseText);
+				//Tar bort loader när ajax anrop är klart
 				var imgSpinn = document.getElementById("imgSpinn").removeAttribute("src");
 			}
 			else
-			{
-				//FEL!!! ÄNDRA! Bygga ihop med felhanteraren
+			{				
 				console.log("läsfel, status:" + xhr.status);
 			}
 		}
